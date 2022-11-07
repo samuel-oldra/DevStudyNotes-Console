@@ -161,7 +161,7 @@ var count = grades.Count();
 
 */
 
-// TODO: Formatar e organizar o programa console.
+// Programa
 
 var publicStudyNote = new PublicStudyNote("Nota AZ-204", "Notas de estudo", "Azure");
 var privateStudyNote = new PrivateStudyNote("Nota AZ-900", "Notas de estudo", "Azure", new List<string> { "luis@mail.com", "dev@mail.com" });
@@ -176,8 +176,16 @@ foreach (var note in notes)
     note.PrintFullDescription();
 }
 
+
+
 abstract class StudyNote
 {
+    public string Title { get; protected set; }
+
+    public string Description { get; protected set; }
+
+    public string Category { get; protected set; }
+
     protected StudyNote(string title, string description, string category)
     {
         Title = title;
@@ -185,53 +193,48 @@ abstract class StudyNote
         Category = category;
     }
 
-    public string Title { get; protected set; }
-    public string Description { get; protected set; }
-    public string Category { get; protected set; }
-
     public abstract void PrintFullDescription();
 }
 
 class PublicStudyNote : StudyNote
 {
-    public PublicStudyNote(string title, string description, string category) : base(title, description, category)
-    {
-    }
-
     public int Likes { get; private set; }
+
     public int Dislikes { get; private set; }
 
-    public void AddLike()
+    public PublicStudyNote(
+        string title,
+        string description,
+        string category)
+        : base(title, description, category)
     {
-        Likes++;
     }
 
+    public void AddLike()
+        => Likes++;
+
     public void AddDislike()
-    {
-        Dislikes++;
-    }
+        => Dislikes++;
+
     public override void PrintFullDescription()
-    {
-        Console.WriteLine($"{Title}, {Description}, {Category}, {Likes} Likes, {Dislikes} Dislikes.");
-    }
+        => Console.WriteLine($"{Title}, {Description}, {Category}, {Likes} Likes, {Dislikes} Dislikes.");
 }
 
 class PrivateStudyNote : StudyNote
 {
-    public PrivateStudyNote(string title, string description, string category, List<string> sharedWith) : base(title, description, category)
-    {
-        SharedWith = sharedWith ?? new List<string>();
-    }
-
     public List<string> SharedWith { get; private set; }
 
+    public PrivateStudyNote(
+        string title,
+        string description,
+        string category,
+        List<string> sharedWith)
+        : base(title, description, category)
+        => SharedWith = sharedWith ?? new List<string>();
+
     public void ShareWith(string email)
-    {
-        SharedWith.Add(email);
-    }
+        => SharedWith.Add(email);
 
     public override void PrintFullDescription()
-    {
-        Console.WriteLine($"{Title}, {Description}, {Category}, SharedWith: {string.Join(' ', SharedWith)}");
-    }
+        => Console.WriteLine($"{Title}, {Description}, {Category}, SharedWith: {string.Join(' ', SharedWith)}");
 }
