@@ -53,9 +53,11 @@ switch (scoreDifference)
     case > 0:
         Console.WriteLine("Time A ganhou.");
         break;
+
     case 0:
         Console.WriteLine("Empate.");
         break;
+
     default:
         Console.WriteLine("Time B ganhou.");
         break;
@@ -151,7 +153,7 @@ var sum = grades.Sum();
 var avg = grades.Average();
 var count = grades.Count();
 
-// Herança 
+// Herança
 // Promover Reusabilidade de dados e comportamentos
 // Classe que herda de outra é a classe filha, e a classe herdada é a classe mãe
 
@@ -178,7 +180,7 @@ foreach (var note in notes)
 
 
 
-abstract class StudyNote
+internal abstract class StudyNote
 {
     public string Title { get; protected set; }
 
@@ -196,7 +198,7 @@ abstract class StudyNote
     public abstract void PrintFullDescription();
 }
 
-class PublicStudyNote : StudyNote
+internal class PublicStudyNote : StudyNote
 {
     public int Likes { get; private set; }
 
@@ -220,7 +222,7 @@ class PublicStudyNote : StudyNote
         => Console.WriteLine($"{Title}, {Description}, {Category}, {Likes} Likes, {Dislikes} Dislikes.");
 }
 
-class PrivateStudyNote : StudyNote
+internal class PrivateStudyNote : StudyNote
 {
     public List<string> SharedWith { get; private set; }
 
