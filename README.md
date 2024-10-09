@@ -20,8 +20,10 @@ Esta é a versão Console da aplicação.
 ```
 dotnet new gitignore
 dotnet new console -o DevStudyNotes.Console
+
 dotnet build
 dotnet run
 dotnet watch run
+
 dotnet publish
 ```
